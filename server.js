@@ -31,12 +31,14 @@ function createNewNote(body, notesArray) {
     const newNote = body;
     if (!Array.isArray(notesArray))
         notesArray = [];
-    
-    if (notesArray.length === 0)
-        notesArray.push(0);
 
-    body.id = notesArray[0];
-    notesArray[0]++;
+    // Generate a unique 'id' for the new note
+    if (notesArray.length === 0) {
+        newNote.id = 1;
+    } else {
+        const lastNote = notesArray[notesArray.length - 1];
+        newNote.id = lastNote.id + 1;
+    }
 
     notesArray.push(newNote);
     fs.writeFileSync(
@@ -45,6 +47,7 @@ function createNewNote(body, notesArray) {
     );
     return newNote;
 }
+
 
 app.post('/api/notes', (req, res) => {
     const newNote = createNewNote(req.body, allNotes);
@@ -55,6 +58,7 @@ function deleteNote(id, notesArray) {
     for (let i = 0; i < notesArray.length; i++) {
         let note = notesArray[i];
 
+        console.log('Iteration', i, 'Note:', note);
         if (note.id == id) {
             notesArray.splice(i, 1);
             fs.writeFileSync(
@@ -66,6 +70,7 @@ function deleteNote(id, notesArray) {
         }
     }
 }
+
 
 app.delete('/api/notes/:id', (req, res) => {
     deleteNote(req.params.id, allNotes);

@@ -4,6 +4,7 @@
   * [Description](#description)
   * [Installation](#installation)
   * [Executing-Program](###Executing-Program)
+  * [Demonstration](###Demonstration)
   * [Questions](#questions)
   * [License](#license)
   
@@ -25,6 +26,11 @@
    npm start
 ```
 
+
+### Demonstration
+
+![Demo of NOTEAPP](./Assets/Notes.jpg)
+[NOTE TAKER DEMO]()
 
 
 ### Questions
